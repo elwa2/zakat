@@ -94,20 +94,20 @@ button:hover {
 #popup {
   display: none;
   position: fixed;
-  top: 69%;
+  top: 86%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border-radius: 8px;
-  width: 80%;
-  max-width: 600px;
+  width: 65%;
+  max-width: 540px;
 }
 
 #popup textarea {
   width: 100%;
-  height: 200px;
+  height: 50px;
   border: none;
   background: #f9f9f9;
   padding: 10px;
