@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>زكاة مال</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>نظام زكاة المال</h1>
+        <input type="text" id="search" placeholder="بحث عن اسم...">
+        <button id="add-button">إضافة</button>
+        <div id="suggestions"></div>
+        <table id="selected-table">
+            <thead>
+                <tr>
+                    <th>تاريخ اليوم</th>
+                    <th>الاسم</th>
+                    <th>المبلغ</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- سيتم ملء الجدول هنا -->
+            </tbody>
+        </table>
+        <div id="total">
+            إجمالي المبلغ: <span id="total-amount">0</span> ريال
+        </div>
+        <button id="export-button">تصدير</button>
+        <button id="add-new">إضافة اسم جديد</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
