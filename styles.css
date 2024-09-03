@@ -1,0 +1,152 @@
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Search input styles */
+#search {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+#search:focus {
+  border-color: #0056b3;
+}
+
+/* Suggestions styles */
+#suggestions {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: calc(100% - 20px);
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+#suggestions div {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#suggestions div:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Table styles */
+#recordTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#recordTable th, #recordTable td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  transition: background-color 0.3s;
+}
+
+#recordTable th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#recordTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#recordTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* New Styles for aligning content */
+#recordTable td.name {
+  text-align: right; /* Align text to the right for names */
+}
+
+#recordTable td.amount {
+  text-align: left; /* Align text to the left for amounts */
+}
+
+/* Popup styles */
+.popup {
+  display: none;
+  position: absolute;
+  background-color: #fefefe;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: auto;
+  max-width: 400px;
+  z-index: 10;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#popup-text {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  resize: none;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+/* Button styles */
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Total Amount styles */
+#totalAmount {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #007bff;
+}
