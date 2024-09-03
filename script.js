@@ -1,107 +1,93 @@
-let data = [];
-let records = [];
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('search');
+  const suggestionsList = document.getElementById('suggestions');
+  const nameDisplay = document.getElementById('name');
+  const amountDisplay = document.getElementById('amount');
+  const addRecordButton = document.getElementById('addRecord');
+  const recordsBody = document.getElementById('recordsBody');
+  const totalAmountDisplay = document.getElementById('totalAmount');
+  const clearRecordsButton = document.getElementById('clearRecords');
+  const popup = document.getElementById('popup');
+  const dataOutput = document.getElementById('dataOutput');
+  const dateToday = document.getElementById('dateToday');
+  let data = [];
+  let records = [];
 
-// Load data from LocalStorage or initialize empty records
-function loadData() {
-    const storedRecords = localStorage.getItem('records');
-    if (storedRecords) {
-        records = JSON.parse(storedRecords);
-    }
+  // تحميل بيانات JSON
+  fetch('data.json')
+      .then(response => response.json())
+      .then(jsonData => {
+          data = jsonData;
+      });
 
-    // Fetch data from JSON file
-    fetch('data.json')
-        .then(response => response.json())
-        .then(jsonData => {
-            data = jsonData;
-            updateSuggestions();
-            displayRecords();
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
+  searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const suggestions = data.filter(item => item.Name.toLowerCase().includes(query));
 
-// Display records in the table
-function displayRecords() {
-    let tableBody = document.getElementById('recordBody');
-    let totalAmount = document.getElementById('totalAmount');
-    
-    tableBody.innerHTML = '';
-    let sum = 0;
+      suggestionsList.innerHTML = suggestions.map(item => `
+          <div class="suggestion" data-name="${item.Name}" data-amount="${item.Amount}">
+              ${item.Name} - ${item.Amount}
+          </div>
+      `).join('');
+      suggestionsList.style.display = suggestions.length ? 'block' : 'none';
+  });
 
-    records.forEach(item => {
-        let row = document.createElement('tr');
-        row.innerHTML = `<td class="name">${item.Name}</td><td class="amount">${item.Amount}</td>`;
-        tableBody.appendChild(row);
-        sum += item.Amount;
-    });
+  suggestionsList.addEventListener('click', (event) => {
+      if (event.target.classList.contains('suggestion')) {
+          const name = event.target.getAttribute('data-name');
+          const amount = event.target.getAttribute('data-amount');
+          searchInput.value = name;
+          nameDisplay.innerText = name;
+          amountDisplay.innerText = amount;
+          suggestionsList.innerHTML = ''; // مسح الاقتراحات
+          suggestionsList.style.display = 'none';
+      }
+  });
 
-    totalAmount.textContent = `إجمالي المبلغ: ${sum}`;
-}
+  addRecordButton.addEventListener('click', () => {
+      const name = nameDisplay.innerText;
+      const amount = parseFloat(amountDisplay.innerText) || 0;
+      const today = new Date().toLocaleDateString('ar-EG', {
+          day: '2-digit',
+          month: 'numeric',
+          year: 'numeric'
+      });
 
-// Format date as DD/MM/YYYY
-function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
+      if (name && amount) {
+          records.push({ Date: today, Name: name, Amount: amount });
+          updateRecordsTable();
+          showPopup();
+      }
+  });
 
-// Display current date in the desired format
-document.getElementById('currentDate').textContent = `تاريخ اليوم: ${formatDate(new Date())}`;
+  clearRecordsButton.addEventListener('click', () => {
+      if (confirm('هل أنت متأكد من مسح جميع السجلات؟')) {
+          records = [];
+          updateRecordsTable();
+      }
+  });
 
-document.getElementById('search').addEventListener('input', function() {
-    let query = this.value.toLowerCase();
-    updateSuggestions(query);
+  function updateRecordsTable() {
+      recordsBody.innerHTML = records.map(record => `
+          <tr>
+              <td>${record.Date}</td>
+              <td>${record.Name}</td>
+              <td>${record.Amount}</td>
+          </tr>
+      `).join('');
+
+      const totalAmount = records.reduce((sum, record) => sum + record.Amount, 0);
+      totalAmountDisplay.innerText = totalAmount.toFixed(2);
+  }
+
+  function showPopup() {
+      const jsonRecords = records.map((record, index) => ({
+          no: index + 1,
+          Name: record.Name,
+          Amount: record.Amount,
+          Date: record.Date
+      }));
+      dataOutput.value = JSON.stringify(jsonRecords, null, 2);
+      popup.style.display = 'block';
+  }
 });
-
-function updateSuggestions(query = '') {
-    let suggestions = [];
-    if (query.length > 0) {
-        suggestions = data.filter(item => item.Name.toLowerCase().includes(query));
-    }
-    let suggestionsBox = document.getElementById('suggestions');
-    suggestionsBox.innerHTML = '';
-
-    suggestions.forEach(item => {
-        let div = document.createElement('div');
-        div.textContent = `${item.Name} - ${item.Amount}`;
-        div.addEventListener('click', function() {
-            document.getElementById('search').value = item.Name;
-            addRecord(item);
-            suggestionsBox.innerHTML = '';
-        });
-        suggestionsBox.appendChild(div);
-    });
-}
-
-function addRecord(item) {
-    // Add record with the correct 'no' from the data
-    const existingRecord = data.find(record => record.Name === item.Name);
-    if (existingRecord) {
-        records.push({ no: existingRecord.no, Name: item.Name, Amount: item.Amount });
-        localStorage.setItem('records', JSON.stringify(records));
-        displayRecords();
-
-        // Show the popup with the updated record JSON
-        const popup = document.getElementById('popup');
-        const popupText = document.getElementById('popup-text');
-        popupText.value = JSON.stringify({ no: existingRecord.no, Name: item.Name, Amount: item.Amount }, null, 2);
-        popup.style.display = 'block';
-    } else {
-        console.error('Record not found in data');
-    }
-}
-
-document.getElementById('printButton').addEventListener('click', () => {
-    window.print();
-});
-
-document.getElementById('clearButton').addEventListener('click', () => {
-    if (confirm('هل أنت متأكد من مسح جميع السجلات؟')) {
-        localStorage.removeItem('records');
-        records = [];
-        displayRecords();
-    }
-});
-
-// Load data when the page loads
-loadData();
