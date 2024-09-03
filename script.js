@@ -19,6 +19,7 @@ function loadData() {
         .catch(error => console.error('Error fetching data:', error));
 }
 
+// Display records in the table
 function displayRecords() {
     let tableBody = document.getElementById('recordBody');
     let totalAmount = document.getElementById('totalAmount');
@@ -35,6 +36,17 @@ function displayRecords() {
 
     totalAmount.textContent = `إجمالي المبلغ: ${sum}`;
 }
+
+// Format date as DD/MM/YYYY
+function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+// Display current date in the desired format
+document.getElementById('currentDate').textContent = `تاريخ اليوم: ${formatDate(new Date())}`;
 
 document.getElementById('search').addEventListener('input', function() {
     let query = this.value.toLowerCase();
@@ -62,9 +74,21 @@ function updateSuggestions(query = '') {
 }
 
 function addRecord(item) {
-    records.push({ Name: item.Name, Amount: item.Amount });
-    localStorage.setItem('records', JSON.stringify(records));
-    displayRecords();
+    // Add record with the correct 'no' from the data
+    const existingRecord = data.find(record => record.Name === item.Name);
+    if (existingRecord) {
+        records.push({ no: existingRecord.no, Name: item.Name, Amount: item.Amount });
+        localStorage.setItem('records', JSON.stringify(records));
+        displayRecords();
+
+        // Show the popup with the updated record JSON
+        const popup = document.getElementById('popup');
+        const popupText = document.getElementById('popup-text');
+        popupText.value = JSON.stringify({ no: existingRecord.no, Name: item.Name, Amount: item.Amount }, null, 2);
+        popup.style.display = 'block';
+    } else {
+        console.error('Record not found in data');
+    }
 }
 
 document.getElementById('printButton').addEventListener('click', () => {
@@ -78,13 +102,6 @@ document.getElementById('clearButton').addEventListener('click', () => {
         displayRecords();
     }
 });
-
-// Close the popup when clicking outside of it
-window.onclick = function(event) {
-    if (event.target == document.getElementById('popup')) {
-        document.getElementById('popup').style.display = 'none';
-    }
-};
 
 // Load data when the page loads
 loadData();

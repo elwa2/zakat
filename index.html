@@ -8,27 +8,37 @@
 </head>
 <body>
     <div class="container">
-        <h1>البحث عن الأسماء</h1>
-        <input type="text" id="search" placeholder="ابحث عن اسم...">
-        <div id="suggestions"></div>
-        <table id="recordTable">
+        <h1>نظام زكاة المال</h1>
+        
+        <!-- البحث عن الاسماء -->
+        <div class="search-container">
+            <input type="text" id="search" placeholder="ابحث عن اسم...">
+            <div id="suggestions" class="suggestions-box"></div>
+        </div>
+
+        <!-- عرض السجلات -->
+        <table>
             <thead>
                 <tr>
-                    <th>اسم</th>
-                    <th>مبلغ</th>
+                    <th>الاسم</th>
+                    <th>المبلغ</th>
                 </tr>
             </thead>
             <tbody id="recordBody"></tbody>
         </table>
-        <div id="totalAmount">إجمالي المبلغ: 0</div>
+        <p id="totalAmount">إجمالي المبلغ: 0</p>
+        <p id="currentDate"></p>
+        
+        <!-- أزرار التحكم -->
         <button id="printButton">طباعة</button>
-        <button id="clearButton">مسح جميع السجلات</button>
-
-        <!-- Popup for new record code -->
-        <div id="popup" class="popup">
+        <button id="clearButton">مسح السجلات</button>
+        
+        <!-- مربع عرض البيانات المضافة -->
+        <div id="popup">
             <textarea id="popup-text" readonly></textarea>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
