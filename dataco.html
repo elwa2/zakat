@@ -99,6 +99,17 @@
             }
         }
 
+        /* زر النسخ */
+        .copy-btn {
+            margin-top: 10px;
+            background-color: #008CBA;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #007B9E;
+        }
+
     </style>
 </head>
 <body>
@@ -120,6 +131,8 @@
     <button onclick="showResult()">إظهار النتيجة</button>
 
     <div class="result" id="result"></div>
+    
+    <button class="copy-btn" onclick="copyResult()">نسخ النتيجة</button>
 </div>
 
 <script>
@@ -137,6 +150,15 @@
         };
 
         document.getElementById('result').innerHTML = JSON.stringify(result, null, 4);
+    }
+
+    function copyResult() {
+        const resultText = document.getElementById('result').textContent;
+        navigator.clipboard.writeText(resultText).then(() => {
+            alert("تم نسخ النتيجة!");
+        }).catch(err => {
+            alert("حدث خطأ أثناء النسخ: " + err);
+        });
     }
 </script>
 
