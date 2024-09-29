@@ -649,744 +649,804 @@
   },
   {
       "no":109,
-      "Name":"زينب الجديلى",
-      "Amount":200,
+      "Name":"زكاة مال",
+      "Amount":10,
       "Date":null
   },
   {
       "no":110,
-      "Name":"زينب الحمراء ابو الفتوح",
-      "Amount":100,
+      "Name":"زكاة مال",
+      "Amount":20,
       "Date":null
   },
   {
       "no":111,
-      "Name":"زينب فضل",
-      "Amount":250,
+      "Name":"زكاة مال",
+      "Amount":30,
       "Date":null
   },
   {
       "no":112,
-      "Name":"سامية الزواوى",
-      "Amount":150,
+      "Name":"زكاة مال",
+      "Amount":40,
       "Date":null
   },
   {
       "no":113,
-      "Name":"سامية شعبان ",
-      "Amount":200,
+      "Name":"زكاة مال",
+      "Amount":50,
       "Date":null
   },
   {
       "no":114,
-      "Name":"سحر السيد",
-      "Amount":200,
+      "Name":"زكاة مال",
+      "Amount":60,
       "Date":null
   },
   {
       "no":115,
-      "Name":"سعاد محمد",
-      "Amount":150,
+      "Name":"زكاة مال",
+      "Amount":70,
       "Date":null
   },
   {
       "no":116,
-      "Name":"سعاد نصر",
-      "Amount":200,
+      "Name":"زكاة مال",
+      "Amount":80,
       "Date":null
   },
   {
       "no":117,
-      "Name":"سعيدة محمد على",
-      "Amount":150,
+      "Name":"زكاة مال",
+      "Amount":90,
       "Date":null
   },
   {
       "no":118,
-      "Name":"سماح اسماعيل ",
+      "Name":"زكاة مال",
       "Amount":100,
       "Date":null
   },
   {
       "no":119,
+      "Name":"زينب الجديلى",
+      "Amount":200,
+      "Date":null
+  },
+  {
+      "no":120,
+      "Name":"زينب الحمراء ابو الفتوح",
+      "Amount":100,
+      "Date":null
+  },
+  {
+      "no":121,
+      "Name":"زينب فضل",
+      "Amount":250,
+      "Date":null
+  },
+  {
+      "no":122,
+      "Name":"سامية الزواوى",
+      "Amount":150,
+      "Date":null
+  },
+  {
+      "no":123,
+      "Name":"سامية شعبان ",
+      "Amount":200,
+      "Date":null
+  },
+  {
+      "no":124,
+      "Name":"سحر السيد",
+      "Amount":200,
+      "Date":null
+  },
+  {
+      "no":125,
+      "Name":"سعاد محمد",
+      "Amount":150,
+      "Date":null
+  },
+  {
+      "no":126,
+      "Name":"سعاد نصر",
+      "Amount":200,
+      "Date":null
+  },
+  {
+      "no":127,
+      "Name":"سعيدة محمد على",
+      "Amount":150,
+      "Date":null
+  },
+  {
+      "no":128,
+      "Name":"سماح اسماعيل ",
+      "Amount":100,
+      "Date":null
+  },
+  {
+      "no":129,
       "Name":"سميحة مصطفى \/ ابراهيم النحاس",
       "Amount":100,
       "Date":null
   },
   {
-      "no":120,
+      "no":130,
       "Name":"سهام محمد الخياط",
       "Amount":200,
       "Date":null
   },
   {
-      "no":121,
+      "no":131,
       "Name":"سونة شريف",
       "Amount":200,
       "Date":null
   },
   {
-      "no":122,
+      "no":132,
       "Name":"شاديه البلاط",
       "Amount":200,
       "Date":null
   },
   {
-      "no":123,
+      "no":133,
       "Name":"شاهيناز",
       "Amount":150,
       "Date":null
   },
   {
-      "no":124,
+      "no":134,
       "Name":"شفيق جلال",
       "Amount":100,
       "Date":null
   },
   {
-      "no":125,
+      "no":135,
       "Name":"شفيقة ذكي",
       "Amount":200,
       "Date":null
   },
   {
-      "no":126,
+      "no":136,
       "Name":"شيماء",
       "Amount":100,
       "Date":null
   },
   {
-      "no":127,
+      "no":137,
       "Name":"صابر السعيد",
       "Amount":200,
       "Date":null
   },
   {
-      "no":128,
+      "no":138,
       "Name":"صالح الشماخ",
       "Amount":200,
       "Date":null
   },
   {
-      "no":129,
+      "no":139,
       "Name":"صالح محمد عبدة",
       "Amount":150,
       "Date":null
   },
   {
-      "no":130,
+      "no":140,
       "Name":"صبرى العطار",
       "Amount":100,
       "Date":null
   },
   {
-      "no":131,
+      "no":141,
       "Name":"صفاء احمد عبدالحميد تقسيم 4",
       "Amount":150,
       "Date":null
   },
   {
-      "no":132,
+      "no":142,
       "Name":"صلاح عيد",
       "Amount":250,
       "Date":null
   },
   {
-      "no":133,
+      "no":143,
       "Name":"طارق عفيفي",
       "Amount":300,
       "Date":null
   },
   {
-      "no":134,
+      "no":144,
       "Name":"طاهرة - حقة السكر",
       "Amount":400,
       "Date":null
   },
   {
-      "no":135,
+      "no":145,
       "Name":"عادل السعيد",
       "Amount":200,
       "Date":null
   },
   {
-      "no":136,
+      "no":146,
       "Name":"عاطفة الرفاعى",
       "Amount":150,
       "Date":null
   },
   {
-      "no":137,
+      "no":147,
       "Name":"عايدة السيد محمد",
       "Amount":400,
       "Date":null
   },
   {
-      "no":138,
+      "no":148,
       "Name":"عايدة محمود خضر",
       "Amount":200,
       "Date":null
   },
   {
-      "no":139,
+      "no":149,
       "Name":"عبد الجواد + نورة جمال",
       "Amount":1000,
       "Date":null
   },
   {
-      "no":140,
+      "no":150,
       "Name":"عبد الحميد الشناوى",
       "Amount":300,
       "Date":null
   },
   {
-      "no":141,
+      "no":151,
       "Name":"عبد العزيز بتاع الغرفة",
       "Amount":100,
       "Date":null
   },
   {
-      "no":142,
+      "no":152,
       "Name":"عبدالحميد خالد",
       "Amount":200,
       "Date":null
   },
   {
-      "no":143,
+      "no":153,
       "Name":"عبدالرازق ابو المعاطى",
       "Amount":100,
       "Date":null
   },
   {
-      "no":144,
+      "no":154,
       "Name":"عبدالرحمن الخياط",
       "Amount":500,
       "Date":null
   },
   {
-      "no":145,
+      "no":155,
       "Name":"عبدالمنصف سليمان",
       "Amount":200,
       "Date":null
   },
   {
-      "no":146,
+      "no":156,
       "Name":"عبير",
       "Amount":150,
       "Date":null
   },
   {
-      "no":147,
+      "no":157,
       "Name":"عبير محمد ممدوح",
       "Amount":200,
       "Date":null
   },
   {
-      "no":148,
+      "no":158,
       "Name":"عزة بهجت متولى",
       "Amount":500,
       "Date":null
   },
   {
-      "no":149,
+      "no":159,
       "Name":"عزيزة رمضان  ",
       "Amount":200,
       "Date":null
   },
   {
-      "no":150,
+      "no":160,
       "Name":"عفاف توفيق محمد رفعت",
       "Amount":300,
       "Date":null
   },
   {
-      "no":151,
+      "no":161,
       "Name":"على خضر",
       "Amount":150,
       "Date":null
   },
   {
-      "no":152,
+      "no":162,
       "Name":"على عبدالعزيز بسيونى",
       "Amount":100,
       "Date":null
   },
   {
-      "no":153,
+      "no":163,
       "Name":"على كوريا",
       "Amount":250,
       "Date":null
   },
   {
-      "no":154,
+      "no":164,
       "Name":"عم احمد حامد",
       "Amount":100,
       "Date":null
   },
   {
-      "no":155,
+      "no":165,
       "Name":"عم جابر",
       "Amount":150,
       "Date":null
   },
   {
-      "no":156,
+      "no":166,
       "Name":"عم جابر يوسف على",
       "Amount":250,
       "Date":null
   },
   {
-      "no":157,
+      "no":167,
       "Name":"عم جليل",
       "Amount":200,
       "Date":null
   },
   {
-      "no":158,
+      "no":168,
       "Name":"عم حمودة",
       "Amount":100,
       "Date":null
   },
   {
-      "no":159,
+      "no":169,
       "Name":"عماد بدير",
       "Amount":100,
       "Date":null
   },
   {
-      "no":160,
+      "no":170,
       "Name":"عيد",
       "Amount":150,
       "Date":null
   },
   {
-      "no":161,
+      "no":171,
       "Name":"عيد   - ابوطقية +  تناظر ",
       "Amount":200,
       "Date":null
   },
   {
-      "no":162,
+      "no":172,
       "Name":"عيشة احمد عز",
       "Amount":200,
       "Date":null
   },
   {
-      "no":163,
+      "no":173,
       "Name":"غالية فهمى \" كل شهرين + 100 \"",
       "Amount":100,
       "Date":null
   },
   {
-      "no":164,
+      "no":174,
       "Name":"غفير عزبة الشيخ",
       "Amount":200,
       "Date":null
   },
   {
-      "no":165,
+      "no":175,
       "Name":"فاتن محمد عبدالرحمن",
       "Amount":300,
       "Date":null
   },
   {
-      "no":166,
+      "no":176,
       "Name":"فاطمة حسن عامر",
       "Amount":100,
       "Date":null
   },
   {
-      "no":167,
+      "no":177,
       "Name":"فاطمة فوزى",
       "Amount":100,
       "Date":null
   },
   {
-      "no":168,
+      "no":178,
       "Name":"فايز كبد",
       "Amount":200,
       "Date":null
   },
   {
-      "no":169,
+      "no":179,
       "Name":"فريال الشامى",
       "Amount":200,
       "Date":null
   },
   {
-      "no":170,
+      "no":180,
       "Name":"فكرية الشحات",
       "Amount":500,
       "Date":null
   },
   {
-      "no":171,
+      "no":181,
       "Name":"فواد الفيل",
       "Amount":200,
       "Date":null
   },
   {
-      "no":172,
+      "no":182,
       "Name":"فوزى محمد حسن",
       "Amount":150,
       "Date":null
   },
   {
-      "no":173,
+      "no":183,
       "Name":"كريمة مختار محمد السيد علي",
       "Amount":500,
       "Date":null
   },
   {
-      "no":174,
+      "no":184,
       "Name":"لبيب محمد عبد العال و دانياا غريب",
       "Amount":250,
       "Date":null
   },
   {
-      "no":175,
+      "no":185,
       "Name":"لواحظ",
       "Amount":100,
       "Date":null
   },
   {
-      "no":176,
+      "no":186,
       "Name":"ليلى ابو زيد متولى",
       "Amount":250,
       "Date":null
   },
   {
-      "no":177,
+      "no":187,
       "Name":"ليلى السيد صلاح",
       "Amount":200,
       "Date":null
   },
   {
-      "no":178,
+      "no":188,
       "Name":"ليلى حمادة محمد بيومى",
       "Amount":200,
       "Date":null
   },
   {
-      "no":179,
+      "no":189,
       "Name":"مبروكة السيد",
       "Amount":200,
       "Date":null
   },
   {
-      "no":180,
+      "no":190,
       "Name":"مجدي عبدالستار طلبه",
       "Amount":500,
       "Date":null
   },
   {
-      "no":181,
+      "no":191,
       "Name":"محمد ابو قورة",
       "Amount":100,
       "Date":null
   },
   {
-      "no":182,
+      "no":192,
       "Name":"محمد الجندى ",
       "Amount":250,
       "Date":null
   },
   {
-      "no":183,
+      "no":193,
       "Name":"محمد السليسي",
       "Amount":200,
       "Date":null
   },
   {
-      "no":184,
+      "no":194,
       "Name":"محمد بتاع الجرايد",
       "Amount":150,
       "Date":null
   },
   {
-      "no":185,
+      "no":195,
       "Name":"محمد بتاع الجرايد - الست",
       "Amount":150,
       "Date":null
   },
   {
-      "no":186,
+      "no":196,
       "Name":"محمد بدير",
       "Amount":100,
       "Date":null
   },
   {
-      "no":187,
+      "no":197,
       "Name":"محمد عبدالمحسن عبدالباقي",
       "Amount":1000,
       "Date":null
   },
   {
-      "no":188,
+      "no":198,
       "Name":"محمد عزت",
       "Amount":400,
       "Date":null
   },
   {
-      "no":189,
+      "no":199,
       "Name":"محمد عزمى",
       "Amount":250,
       "Date":null
   },
   {
-      "no":190,
+      "no":200,
       "Name":"محمد على راجح",
-      "Amount":1800,
+      "Amount":3300,
       "Date":null
   },
   {
-      "no":191,
+      "no":201,
       "Name":"محمد غازى",
       "Amount":150,
       "Date":null
   },
   {
-      "no":192,
+      "no":202,
       "Name":"محمدى المغاورى",
       "Amount":250,
       "Date":null
   },
   {
-      "no":193,
+      "no":203,
       "Name":"محمود الشارنوبى",
       "Amount":100,
       "Date":null
   },
   {
-      "no":194,
+      "no":204,
       "Name":"محمود سيد محمد",
       "Amount":500,
       "Date":null
   },
   {
-      "no":195,
+      "no":205,
       "Name":"مدام عادل فواد",
       "Amount":350,
       "Date":null
   },
   {
-      "no":196,
+      "no":206,
       "Name":"مدحت الشيخ مكتبة",
       "Amount":1000,
       "Date":null
   },
   {
-      "no":197,
+      "no":207,
       "Name":"مديحة ابو زيد ",
       "Amount":150,
       "Date":null
   },
   {
-      "no":198,
+      "no":208,
       "Name":"مرفت الهوارى + صباح",
       "Amount":1000,
       "Date":null
   },
   {
-      "no":199,
+      "no":209,
       "Name":"مزايا",
       "Amount":200,
       "Date":null
   },
   {
-      "no":200,
+      "no":210,
       "Name":"مسجد الايمان",
       "Amount":1000,
       "Date":null
   },
   {
-      "no":201,
+      "no":211,
       "Name":"مسجد الشيتانى",
       "Amount":500,
       "Date":null
   },
   {
-      "no":202,
+      "no":212,
       "Name":"مصطفى مجدى احمد",
       "Amount":400,
       "Date":null
   },
   {
-      "no":203,
+      "no":213,
       "Name":"ملكة السيد",
       "Amount":150,
       "Date":null
   },
   {
-      "no":204,
+      "no":214,
       "Name":"ملكة راجح",
       "Amount":1300,
       "Date":null
   },
   {
-      "no":205,
+      "no":215,
       "Name":"ملكة محمود",
       "Amount":150,
       "Date":null
   },
   {
-      "no":206,
+      "no":216,
       "Name":"منال + عمتها",
       "Amount":250,
       "Date":null
   },
   {
-      "no":207,
+      "no":217,
       "Name":"منى شوقى",
       "Amount":200,
       "Date":null
   },
   {
-      "no":208,
+      "no":218,
       "Name":"مني فكري الدرينى",
       "Amount":200,
       "Date":null
   },
   {
-      "no":209,
+      "no":219,
       "Name":"مها عبد الناصر",
       "Amount":200,
       "Date":null
   },
   {
-      "no":210,
+      "no":220,
       "Name":"ميادة السيد + بدرية بيومى",
       "Amount":400,
       "Date":null
   },
   {
-      "no":211,
+      "no":221,
       "Name":"نبيلة ابو الهنا",
       "Amount":250,
       "Date":null
   },
   {
-      "no":212,
+      "no":222,
       "Name":"نجدية",
       "Amount":200,
       "Date":null
   },
   {
-      "no":213,
+      "no":223,
       "Name":"نجلاء",
       "Amount":150,
       "Date":null
   },
   {
-      "no":214,
+      "no":224,
       "Name":"نجلاء بدير",
       "Amount":500,
       "Date":null
   },
   {
-      "no":215,
+      "no":225,
       "Name":"نسمة السعيد عطيه",
       "Amount":150,
       "Date":null
   },
   {
-      "no":216,
+      "no":226,
       "Name":"نسمة حسن",
       "Amount":200,
       "Date":null
   },
   {
-      "no":217,
+      "no":227,
       "Name":"نسمة على الدرس",
       "Amount":2200,
       "Date":null
   },
   {
-      "no":218,
+      "no":228,
       "Name":"هالة المعفريت",
       "Amount":200,
       "Date":null
   },
   {
-      "no":219,
+      "no":229,
       "Name":"هداية المعفرت - هالة",
       "Amount":150,
       "Date":null
   },
   {
-      "no":220,
+      "no":230,
       "Name":"هدى عبدالله - حمد حشو",
       "Amount":3000,
       "Date":null
   },
   {
-      "no":221,
+      "no":231,
       "Name":"هدى ناصف عبدالجليل (لمدة سنة من 8\/2024)",
       "Amount":1000,
       "Date":null
   },
   {
-      "no":222,
+      "no":232,
       "Name":"هشام عامر",
       "Amount":250,
       "Date":null
   },
   {
-      "no":223,
+      "no":233,
       "Name":"هند ابراهيم عمران",
       "Amount":300,
       "Date":null
   },
   {
-      "no":224,
+      "no":234,
       "Name":"هند عبدالله",
       "Amount":200,
       "Date":null
   },
   {
-      "no":225,
+      "no":235,
       "Name":"هنية الشاملى",
       "Amount":150,
       "Date":null
   },
   {
-      "no":226,
+      "no":236,
       "Name":"هوايدة عبدالكريم",
       "Amount":250,
       "Date":null
   },
   {
-      "no":227,
+      "no":237,
       "Name":"هيام منصور",
       "Amount":500,
       "Date":null
   },
   {
-      "no":228,
+      "no":238,
       "Name":"وجية",
       "Amount":300,
       "Date":null
   },
   {
-      "no":229,
+      "no":239,
       "Name":"وفاء العربى الافريقي",
       "Amount":150,
       "Date":null
   },
   {
-      "no":230,
+      "no":240,
       "Name":"وفاء ام محمد",
       "Amount":200,
       "Date":null
   },
   {
-      "no":231,
+      "no":241,
       "Name":"ولاء سليم",
       "Amount":150,
       "Date":null
   },
   {
-      "no":232,
+      "no":242,
       "Name":"وليد محمد عزت",
       "Amount":500,
       "Date":null
