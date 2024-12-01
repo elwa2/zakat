@@ -29,7 +29,13 @@ function displayRecords() {
 
     records.forEach(item => {
         let row = document.createElement('tr');
-        row.innerHTML = `<td class="name">${item.Name}</td><td class="amount">${item.Amount}</td>`;
+        row.innerHTML = `
+            <td class="name">${item.Name}</td>
+            <td class="amount">${item.Amount}</td>
+            <td>
+                <button class="delete-btn" onclick="confirmDelete(${item.no})">حذف</button>
+            </td>
+        `;
         tableBody.appendChild(row);
         sum += item.Amount;
     });
@@ -61,6 +67,12 @@ function updateSuggestions(query = '') {
     let suggestionsBox = document.getElementById('suggestions');
     suggestionsBox.innerHTML = '';
 
+    if (suggestions.length > 0) {
+        suggestionsBox.style.display = 'block';
+    } else {
+        suggestionsBox.style.display = 'none';
+    }
+
     suggestions.forEach(item => {
         let div = document.createElement('div');
         div.textContent = `${item.Name} - ${item.Amount}`;
@@ -68,20 +80,19 @@ function updateSuggestions(query = '') {
             document.getElementById('search').value = item.Name;
             addRecord(item);
             suggestionsBox.innerHTML = '';
+            suggestionsBox.style.display = 'none';
         });
         suggestionsBox.appendChild(div);
     });
 }
 
 function addRecord(item) {
-    // Add record with the correct 'no' from the data
     const existingRecord = data.find(record => record.Name === item.Name);
     if (existingRecord) {
         records.push({ no: existingRecord.no, Name: item.Name, Amount: item.Amount });
         localStorage.setItem('records', JSON.stringify(records));
         displayRecords();
 
-        // Show the popup with the updated record JSON
         const popup = document.getElementById('popup');
         const popupText = document.getElementById('popup-text');
         popupText.value = JSON.stringify({ no: existingRecord.no, Name: item.Name, Amount: item.Amount }, null, 2);
@@ -100,6 +111,58 @@ document.getElementById('clearButton').addEventListener('click', () => {
         localStorage.removeItem('records');
         records = [];
         displayRecords();
+    }
+});
+
+// Event listener for the "Cancel" button
+document.getElementById('clearInput').addEventListener('click', function() {
+    document.getElementById('search').value = '';
+    document.getElementById('suggestions').innerHTML = '';
+    document.getElementById('suggestions').style.display = 'none';
+});
+
+// Hide suggestions when clicking outside the search container
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.search-container')) {
+        document.getElementById('suggestions').innerHTML = '';
+        document.getElementById('suggestions').style.display = 'none';
+    }
+});
+
+// Clear input and hide suggestions when "Escape" key is pressed
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        document.getElementById('search').value = '';
+        document.getElementById('suggestions').innerHTML = '';
+        document.getElementById('suggestions').style.display = 'none';
+    }
+});
+
+function confirmDelete(no) {
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+        deleteRecord(no);
+    }
+}
+
+function deleteRecord(no) {
+    records = records.filter(record => record.no !== no);
+    localStorage.setItem('records', JSON.stringify(records));
+    displayRecords();
+}
+
+// Apply saved theme on page load
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+}
+
+// Theme toggle functionality
+document.getElementById('themeToggle').addEventListener('click', function() {
+    if (document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
     }
 });
 
