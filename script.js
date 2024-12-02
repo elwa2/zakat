@@ -46,7 +46,10 @@ function displayRecords() {
     tableBody.innerHTML = '';
     let sum = 0;
 
-    records.forEach(item => {
+    // Create a copy of records array and reverse it
+    const reversedRecords = [...records].reverse();
+
+    reversedRecords.forEach(item => {
         let row = document.createElement('tr');
         row.innerHTML = `
             <td class="number">${item.no}</td>

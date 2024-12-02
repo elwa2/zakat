@@ -403,3 +403,37 @@ button:active {
     box-shadow: none !important;
   }
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+   padding: 10px;
+  text-align: center;
+}
+
+table th {
+   
+  font-weight: bold;
+}
+
+tbody tr:nth-child(odd) {
+}
+
+tbody tr:nth-child(even) {
+}
+
+button.delete-btn {
+  background-color: #e74c3c;
+   border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button.delete-btn:hover {
+  background-color: #c0392b;
+}
