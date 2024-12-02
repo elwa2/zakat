@@ -1,22 +1,41 @@
+// Google Sheets configuration
+const SHEET_ID = '1qioJ0BnPXRv_Px66HXkkMiqInsDBiHLI2jgnLauM1SI';
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
 let data = [];
 let records = [];
 
-// Load data from LocalStorage or initialize empty records
-function loadData() {
-    const storedRecords = localStorage.getItem('records');
-    if (storedRecords) {
-        records = JSON.parse(storedRecords);
-    }
+// Load data from Google Sheets
+async function loadData() {
+    try {
+        const response = await fetch(SHEET_URL);
+        if (!response.ok) {
+            throw new Error('Failed to fetch data from Google Sheets');
+        }
 
-    // Fetch data from JSON file
-    fetch('data.json')
-        .then(response => response.json())
-        .then(jsonData => {
-            data = jsonData;
-            updateSuggestions();
-            displayRecords();
-        })
-        .catch(error => console.error('Error fetching data:', error));
+        const text = await response.text();
+        // استخراج JSON من استجابة Google Visualization API
+        const jsonData = JSON.parse(text.substring(47).slice(0, -2));
+        
+        // تحويل البيانات من تنسيق Google Sheets إلى التنسيق المطلوب
+        data = jsonData.table.rows.map(row => ({
+            no: parseInt(row.c[0]?.v) || 0,
+            Name: row.c[1]?.v || '',
+            Amount: parseInt(row.c[2]?.v) || 0
+        })).filter(item => item.no && item.Name && item.Amount);
+
+        // تحميل السجلات المحفوظة محلياً
+        const storedRecords = localStorage.getItem('records');
+        if (storedRecords) {
+            records = JSON.parse(storedRecords);
+        }
+
+        updateSuggestions();
+        displayRecords();
+    } catch (error) {
+        console.error('Error loading data:', error);
+        alert('حدث خطأ في تحميل البيانات. يرجى التأكد من اتصال الإنترنت والمحاولة مرة أخرى.');
+    }
 }
 
 // Display records in the table
@@ -32,7 +51,7 @@ function displayRecords() {
         row.innerHTML = `
             <td class="number">${item.no}</td>
             <td class="name">${item.Name}</td>
-            <td class="amount">${item.Amount}</td>
+            <td class="amount">${item.Amount.toLocaleString('ar-EG')}</td>
             <td>
                 <button class="delete-btn" onclick="confirmDelete(${item.no})">حذف</button>
             </td>
@@ -41,25 +60,8 @@ function displayRecords() {
         sum += item.Amount;
     });
 
-    totalAmount.textContent = `إجمالي المبلغ: ${sum}`;
+    totalAmount.textContent = `إجمالي المبلغ: ${sum.toLocaleString('ar-EG')}`;
 }
-
-// Format date as DD/MM/YYYY
-function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
-
-// Display current date
-document.getElementById('currentDate').textContent = `تاريخ اليوم: ${formatDate(new Date())}`;
-
-// Search functionality
-document.getElementById('search').addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-    updateSuggestions(query);
-});
 
 // Update suggestions based on search query
 function updateSuggestions(query = '') {
@@ -70,14 +72,15 @@ function updateSuggestions(query = '') {
     if (query.length < 1) return;
 
     const matches = data.filter(item => 
-        item.Name.toLowerCase().includes(query)
+        item.Name.toLowerCase().includes(query.toLowerCase()) &&
+        !records.some(record => record.no === item.no)
     );
 
     if (matches.length > 0) {
         suggestionsBox.style.display = 'block';
         matches.forEach(item => {
             const div = document.createElement('div');
-            div.textContent = item.Name;
+            div.textContent = `${item.Name} - ${item.Amount.toLocaleString('ar-EG')}`;
             div.onclick = () => addRecord(item);
             suggestionsBox.appendChild(div);
         });
@@ -95,18 +98,21 @@ function addRecord(item) {
     document.getElementById('suggestions').style.display = 'none';
 }
 
-// Clear search input
+// Event Listeners
+document.getElementById('search').addEventListener('input', function() {
+    const query = this.value;
+    updateSuggestions(query);
+});
+
 document.getElementById('clearInput').addEventListener('click', () => {
     document.getElementById('search').value = '';
     document.getElementById('suggestions').style.display = 'none';
 });
 
-// Print functionality
 document.getElementById('printButton').addEventListener('click', () => {
     window.print();
 });
 
-// Clear all records
 document.getElementById('clearButton').addEventListener('click', () => {
     if (confirm('هل أنت متأكد من حذف جميع السجلات؟')) {
         records = [];
@@ -115,7 +121,6 @@ document.getElementById('clearButton').addEventListener('click', () => {
     }
 });
 
-// Delete specific record
 function confirmDelete(no) {
     if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
         deleteRecord(no);
@@ -138,6 +143,21 @@ document.getElementById('themeToggle').addEventListener('click', () => {
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
 }
+
+// Format date
+function formatDate(date) {
+    return new Intl.DateTimeFormat('ar-EG', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    }).format(date);
+}
+
+// Display current date
+document.getElementById('currentDate').textContent = `تاريخ اليوم: ${formatDate(new Date())}`;
+
+// Reload data every 5 minutes to keep it synchronized
+setInterval(loadData, 5 * 60 * 1000);
 
 // Initialize data on page load
 loadData();
