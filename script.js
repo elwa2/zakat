@@ -30,6 +30,7 @@ function displayRecords() {
     records.forEach(item => {
         let row = document.createElement('tr');
         row.innerHTML = `
+            <td class="number">${item.no}</td>
             <td class="name">${item.Name}</td>
             <td class="amount">${item.Amount}</td>
             <td>
@@ -51,93 +52,70 @@ function formatDate(date) {
     return `${day}/${month}/${year}`;
 }
 
-// Display current date in the desired format
+// Display current date
 document.getElementById('currentDate').textContent = `تاريخ اليوم: ${formatDate(new Date())}`;
 
+// Search functionality
 document.getElementById('search').addEventListener('input', function() {
-    let query = this.value.toLowerCase();
+    const query = this.value.toLowerCase();
     updateSuggestions(query);
 });
 
+// Update suggestions based on search query
 function updateSuggestions(query = '') {
-    let suggestions = [];
-    if (query.length > 0) {
-        suggestions = data.filter(item => item.Name.toLowerCase().includes(query));
-    }
-    let suggestionsBox = document.getElementById('suggestions');
+    const suggestionsBox = document.getElementById('suggestions');
     suggestionsBox.innerHTML = '';
+    suggestionsBox.style.display = 'none';
 
-    if (suggestions.length > 0) {
+    if (query.length < 1) return;
+
+    const matches = data.filter(item => 
+        item.Name.toLowerCase().includes(query)
+    );
+
+    if (matches.length > 0) {
         suggestionsBox.style.display = 'block';
-    } else {
-        suggestionsBox.style.display = 'none';
-    }
-
-    suggestions.forEach(item => {
-        let div = document.createElement('div');
-        div.textContent = `${item.Name} - ${item.Amount}`;
-        div.addEventListener('click', function() {
-            document.getElementById('search').value = item.Name;
-            addRecord(item);
-            suggestionsBox.innerHTML = '';
-            suggestionsBox.style.display = 'none';
+        matches.forEach(item => {
+            const div = document.createElement('div');
+            div.textContent = item.Name;
+            div.onclick = () => addRecord(item);
+            suggestionsBox.appendChild(div);
         });
-        suggestionsBox.appendChild(div);
-    });
+    }
 }
 
+// Add record to the table
 function addRecord(item) {
-    const existingRecord = data.find(record => record.Name === item.Name);
-    if (existingRecord) {
-        records.push({ no: existingRecord.no, Name: item.Name, Amount: item.Amount });
+    if (!records.some(record => record.no === item.no)) {
+        records.push(item);
         localStorage.setItem('records', JSON.stringify(records));
         displayRecords();
-
-        const popup = document.getElementById('popup');
-        const popupText = document.getElementById('popup-text');
-        popupText.value = JSON.stringify({ no: existingRecord.no, Name: item.Name, Amount: item.Amount }, null, 2);
-        popup.style.display = 'block';
-    } else {
-        console.error('Record not found in data');
     }
+    document.getElementById('search').value = '';
+    document.getElementById('suggestions').style.display = 'none';
 }
 
+// Clear search input
+document.getElementById('clearInput').addEventListener('click', () => {
+    document.getElementById('search').value = '';
+    document.getElementById('suggestions').style.display = 'none';
+});
+
+// Print functionality
 document.getElementById('printButton').addEventListener('click', () => {
     window.print();
 });
 
+// Clear all records
 document.getElementById('clearButton').addEventListener('click', () => {
-    if (confirm('هل أنت متأكد من مسح جميع السجلات؟')) {
-        localStorage.removeItem('records');
+    if (confirm('هل أنت متأكد من حذف جميع السجلات؟')) {
         records = [];
+        localStorage.removeItem('records');
         displayRecords();
     }
 });
 
-// Event listener for the "Cancel" button
-document.getElementById('clearInput').addEventListener('click', function() {
-    document.getElementById('search').value = '';
-    document.getElementById('suggestions').innerHTML = '';
-    document.getElementById('suggestions').style.display = 'none';
-});
-
-// Hide suggestions when clicking outside the search container
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('.search-container')) {
-        document.getElementById('suggestions').innerHTML = '';
-        document.getElementById('suggestions').style.display = 'none';
-    }
-});
-
-// Clear input and hide suggestions when "Escape" key is pressed
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        document.getElementById('search').value = '';
-        document.getElementById('suggestions').innerHTML = '';
-        document.getElementById('suggestions').style.display = 'none';
-    }
-});
-
+// Delete specific record
 function confirmDelete(no) {
     if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
         deleteRecord(no);
@@ -150,21 +128,16 @@ function deleteRecord(no) {
     displayRecords();
 }
 
+// Theme toggle
+document.getElementById('themeToggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+});
+
 // Apply saved theme on page load
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
 }
 
-// Theme toggle functionality
-document.getElementById('themeToggle').addEventListener('click', function() {
-    if (document.body.classList.contains('dark-mode')) {
-        document.body.classList.remove('dark-mode');
-        localStorage.setItem('theme', 'light');
-    } else {
-        document.body.classList.add('dark-mode');
-        localStorage.setItem('theme', 'dark');
-    }
-});
-
-// Load data when the page loads
+// Initialize data on page load
 loadData();
