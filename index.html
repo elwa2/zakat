@@ -8,6 +8,7 @@
     <link rel="icon" href="ico.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="print.css" media="print">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -53,19 +54,17 @@
             </section>
             
             <!-- أزرار التحكم -->
-            <section class="controls-section">
-                <div class="button-group">
-                    <button id="printButton" class="primary-button">
-                        <span>طباعة</span>
-                    </button>
-                    <button id="clearButton" class="warning-button">
-                        <span>مسح السجلات</span>
-                    </button>
-                    <button id="themeToggle" class="secondary-button">
-                        <span>تغيير المظهر</span>
-                    </button>
-                </div>
-            </section>
+            <div class="floating-controls">
+                <button id="printButton" class="control-button" title="طباعة">
+                    <i class="fas fa-print"></i>
+                </button>
+                <button id="clearButton" class="control-button" title="مسح السجلات">
+                    <i class="fas fa-trash"></i>
+                </button>
+                <button id="themeToggle" class="control-button" title="تغيير المظهر">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </main>
     </div>
     

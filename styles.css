@@ -308,6 +308,75 @@ button:active {
   background: var(--secondary-color);
 }
 
+/* تنسيق الأزرار العائمة */
+.floating-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.control-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.control-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.control-button i {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+#printButton {
+    background-color: #4CAF50;
+}
+
+#clearButton {
+    background-color: #f44336;
+}
+
+#themeToggle {
+    background-color: #2196F3;
+}
+
+#printButton i,
+#clearButton i,
+#themeToggle i {
+    color: white;
+}
+
+/* تعديل لوضع الظلام */
+.dark-mode .control-button {
+    background-color: #333;
+}
+
+.dark-mode .control-button i {
+    color: #fff;
+}
+
+/* تخفي الأزرار عند الطباعة */
+@media print {
+    .floating-controls {
+        display: none;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1400px) {
   :root {
