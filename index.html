@@ -6,64 +6,110 @@
     <meta name="description" content="نظام حساب زكاة المال - شركة السلام">
     <title>نظام زكاة المال - شركة السلام</title>
     <link rel="icon" href="ico.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="print.css" media="print">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#475569',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>نظام زكاة المال</h1>
-            <p class="subtitle">شركة السلام</p>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-primary dark:text-blue-400 mb-2">نظام زكاة المال</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400">شركة السلام</p>
         </header>
         
-        <main>
+        <main class="space-y-8">
             <!-- البحث عن الأسماء -->
             <section class="search-section">
-                <div class="search-container">
-                    <div class="input-group">
-                        <input type="text" id="search" placeholder="ابحث عن اسم..." aria-label="البحث عن اسم">
-                        <button id="clearInput" aria-label="مسح البحث">
-                            <span>مسح</span>
+                <div class="max-w-2xl mx-auto relative">
+                    <div class="relative">
+                        <input type="text" id="search" 
+                               class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 
+                                      focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                      dark:bg-gray-800 dark:text-white transition-all duration-200"
+                               placeholder="ابحث عن اسم..." aria-label="البحث عن اسم">
+                        <button id="clearInput" 
+                                class="absolute left-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 
+                                       dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200"
+                                aria-label="مسح البحث">
+                            <i class="fas fa-times"></i>
                         </button>
                     </div>
-                    <div id="suggestions" class="suggestions-box" role="listbox"></div>
+                    <div id="suggestions" class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg 
+                                                border border-gray-200 dark:border-gray-700 max-h-60 overflow-y-auto"></div>
                 </div>
             </section>
             
             <!-- عرض السجلات -->
-            <section class="records-section">
-                <div class="table-container">
-                    <table aria-label="سجلات الزكاة">
+            <section class="records-section bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full" aria-label="سجلات الزكاة">
                         <thead>
-                            <tr>
-                                <th scope="col">الرقم</th>
-                                <th scope="col">الاسم</th>
-                                <th scope="col">المبلغ</th>
-                                <th scope="col">إجراءات</th>
+                            <tr class="border-b-2 border-gray-200 dark:border-gray-700">
+                                <th class="px-4 py-3 text-right text-gray-700 dark:text-gray-300">الرقم</th>
+                                <th class="px-4 py-3 text-right text-gray-700 dark:text-gray-300">الاسم</th>
+                                <th class="px-4 py-3 text-right text-gray-700 dark:text-gray-300">المبلغ</th>
+                                <th class="px-4 py-3 text-right text-gray-700 dark:text-gray-300">إجراءات</th>
                             </tr>
                         </thead>
                         <tbody id="recordBody"></tbody>
                     </table>
                 </div>
                 
-                <div class="summary">
-                    <p id="totalAmount" class="total">إجمالي المبلغ: 0</p>
-                    <p id="currentDate" class="date"></p>
+                <div class="mt-6 flex justify-between items-center">
+                    <p id="totalAmount" class="text-lg font-semibold text-primary dark:text-blue-400">إجمالي المبلغ: 0</p>
                 </div>
             </section>
             
+            <!-- تاريخ متحرك -->
+            <div class="fixed top-4 left-4 bg-blue-600 dark:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-lg 
+                        transform hover:scale-105 transition-all duration-200 text-lg font-bold" id="currentDate">
+            </div>
+            
             <!-- أزرار التحكم -->
-            <div class="floating-controls">
-                <button id="printButton" class="control-button" title="طباعة">
-                    <i class="fas fa-print"></i>
+            <div class="fixed bottom-8 left-8 flex flex-col gap-4">
+                <button id="printButton" 
+                        class="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg
+                               flex items-center justify-center transition-all duration-200 hover:scale-110 print:hidden"
+                        title="طباعة">
+                    <i class="fas fa-print text-lg"></i>
                 </button>
-                <button id="clearButton" class="control-button" title="مسح السجلات">
-                    <i class="fas fa-trash"></i>
+                <button id="downloadButton" 
+                        class="w-12 h-12 rounded-full bg-green-600 hover:bg-green-700 text-white shadow-lg
+                               flex items-center justify-center transition-all duration-200 hover:scale-110 print:hidden"
+                        title="تحميل">
+                    <i class="fas fa-download text-lg"></i>
                 </button>
-                <button id="themeToggle" class="control-button" title="تغيير المظهر">
-                    <i class="fas fa-moon"></i>
+                <button id="clearButton" 
+                        class="w-12 h-12 rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg
+                               flex items-center justify-center transition-all duration-200 hover:scale-110 print:hidden"
+                        title="مسح السجلات">
+                    <i class="fas fa-trash-alt text-lg"></i>
                 </button>
+                <button id="themeToggle" 
+                        class="w-12 h-12 rounded-full bg-gray-600 hover:bg-gray-700 text-white shadow-lg
+                               flex items-center justify-center transition-all duration-200 hover:scale-110 print:hidden"
+                        title="تغيير المظهر">
+                    <i class="fas fa-moon text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Print-only content -->
+            <div class="hidden print:block print:mb-8 text-center">
+                <h2 class="text-2xl font-bold mb-2">نظام زكاة المال - شركة السلام</h2>
+                <p id="printDate" class="text-lg"></p>
             </div>
         </main>
     </div>

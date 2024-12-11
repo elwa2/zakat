@@ -49,44 +49,59 @@ function displayRecords() {
     // Create a copy of records array and reverse it
     const reversedRecords = [...records].reverse();
 
-    reversedRecords.forEach(item => {
-        let row = document.createElement('tr');
+    reversedRecords.forEach((record, index) => {
+        sum += record.Amount;
+        const row = document.createElement('tr');
+        row.className = 'border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150';
+        
         row.innerHTML = `
-            <td class="number">${item.no}</td>
-            <td class="name">${item.Name}</td>
-            <td class="amount">${item.Amount.toLocaleString('ar-EG')}</td>
-            <td>
-                <button class="delete-btn" onclick="confirmDelete(${item.no})">حذف</button>
+            <td class="px-4 py-3 text-gray-800 dark:text-gray-200">${record.no}</td>
+            <td class="px-4 py-3 text-gray-800 dark:text-gray-200">${record.Name}</td>
+            <td class="px-4 py-3 text-gray-800 dark:text-gray-200">${record.Amount.toLocaleString('en-US')} EGP</td>
+            <td class="px-4 py-3">
+                <button onclick="confirmDelete(${record.no})" 
+                        class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
             </td>
         `;
         tableBody.appendChild(row);
-        sum += item.Amount;
     });
 
-    totalAmount.textContent = `إجمالي المبلغ: ${sum.toLocaleString('ar-EG')}`;
+    totalAmount.textContent = `إجمالي المبلغ: ${sum.toLocaleString('en-US')} EGP`;
 }
 
 // Update suggestions based on search query
 function updateSuggestions(query = '') {
-    const suggestionsBox = document.getElementById('suggestions');
-    suggestionsBox.innerHTML = '';
-    suggestionsBox.style.display = 'none';
+    const suggestionsDiv = document.getElementById('suggestions');
+    suggestionsDiv.innerHTML = '';
+    
+    if (!query) {
+        suggestionsDiv.style.display = 'none';
+        return;
+    }
 
-    if (query.length < 1) return;
+    const filteredData = data.filter(item => 
+        item.Name.toLowerCase().includes(query.toLowerCase()) ||
+        item.no.toString().includes(query)
+    ).slice(0, 5);
 
-    const matches = data.filter(item => 
-        item.Name.toLowerCase().includes(query.toLowerCase()) &&
-        !records.some(record => record.no === item.no)
-    );
-
-    if (matches.length > 0) {
-        suggestionsBox.style.display = 'block';
-        matches.forEach(item => {
+    if (filteredData.length > 0) {
+        suggestionsDiv.style.display = 'block';
+        filteredData.forEach(item => {
             const div = document.createElement('div');
-            div.textContent = `${item.Name} - ${item.Amount.toLocaleString('ar-EG')}`;
-            div.onclick = () => addRecord(item);
-            suggestionsBox.appendChild(div);
+            div.className = 'px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-200 transition-colors duration-150';
+            div.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span>${item.Name}</span>
+                    <span class="text-gray-600 dark:text-gray-400">${item.Amount.toLocaleString('en-US')} EGP</span>
+                </div>
+            `;
+            div.addEventListener('click', () => addRecord(item));
+            suggestionsDiv.appendChild(div);
         });
+    } else {
+        suggestionsDiv.style.display = 'none';
     }
 }
 
@@ -138,29 +153,108 @@ function deleteRecord(no) {
 
 // Theme toggle
 document.getElementById('themeToggle').addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    const html = document.documentElement;
+    const isDark = html.classList.toggle('dark');
+    const themeIcon = document.querySelector('#themeToggle i');
+    
+    if (isDark) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+    }
+    
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
-// Apply saved theme on page load
-if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
+// Initialize theme
+const theme = localStorage.getItem('theme');
+if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    const themeIcon = document.querySelector('#themeToggle i');
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
 }
 
-// Format date
-function formatDate(date) {
-    return new Intl.DateTimeFormat('ar-EG', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-    }).format(date);
+// Format date with animation
+function updateDate() {
+    const dateElement = document.getElementById('currentDate');
+    const now = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    };
+    dateElement.textContent = new Date().toLocaleDateString('ar', options);
 }
 
-// Display current date
-document.getElementById('currentDate').textContent = `تاريخ اليوم: ${formatDate(new Date())}`;
+// Update date every second
+setInterval(updateDate, 1000);
+updateDate(); // Initial update
+
+// Click outside to close suggestions
+document.addEventListener('click', function(e) {
+    const suggestionsDiv = document.getElementById('suggestions');
+    const searchInput = document.getElementById('search');
+    if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+        suggestionsDiv.style.display = 'none';
+    }
+});
 
 // Reload data every 5 minutes to keep it synchronized
 setInterval(loadData, 5 * 60 * 1000);
 
 // Initialize data on page load
 loadData();
+
+// Format date for filename
+function formatDateForFile() {
+    const now = new Date();
+    return now.toISOString().split('T')[0];
+}
+
+// Download records as CSV
+function downloadRecords() {
+    const headers = ['الرقم', 'الاسم', 'المبلغ'];
+    const csvContent = [
+        headers.join(','),
+        ...records.map(record => 
+            `${record.no},${record.Name},${record.Amount}`
+        )
+    ].join('\n');
+
+    const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute('href', url);
+    link.setAttribute('download', `زكاة_المال_${formatDateForFile()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Update print date
+function updatePrintDate() {
+    const printDateElement = document.getElementById('printDate');
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    printDateElement.textContent = `تاريخ التقرير: ${new Date().toLocaleDateString('ar', options)}`;
+}
+
+// Event Listeners
+document.getElementById('downloadButton').addEventListener('click', downloadRecords);
+
+// Update print date before printing
+window.addEventListener('beforeprint', updatePrintDate);

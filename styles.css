@@ -506,3 +506,6 @@ button.delete-btn {
 button.delete-btn:hover {
   background-color: #c0392b;
 }
+div#suggestions {
+  width: 65%;
+}
